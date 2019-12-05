@@ -270,7 +270,7 @@ Productos.sync().then(() => {
 
 });
 
-// --- modelo producto ---
+// --- modelo factura ---
 
 facturas.init ({
 
@@ -335,6 +335,69 @@ categoria.init ({
     }
   }
 })
+
+// conectar categoria
+
+categoria.sync().then(() => {
+
+  return categoria.create({
+    
+    id_categoria: 1,
+    nombre: 'Tablet'
+
+  })
+
+});
+
+
+
+// --- Modelo Provincias ---
+
+provincias.init ({
+
+  id_provincia: {
+  type: Sequelize.INTEGER(2),
+  allowNull: false,
+  autoIncrement: true,
+  primaryKey: true
+  },
+
+  nombre: {
+    type: Sequelize.STRING(20),
+    allowNull: true,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  },
+
+  pais: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  }
+});
+
+// conectar facturas
+
+provincia.sync().then(() => {
+
+  return provincia.create({
+    
+    id_provincia: 1,
+    nombre: 'Valencia',
+    pais: 'Espanya'
+
+  })
+
+});
+
+
+
+
+
+
 
 
 module.exports = app;
