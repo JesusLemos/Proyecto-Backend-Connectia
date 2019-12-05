@@ -204,7 +204,7 @@ productos.init({
   id_categoria: {
     type: Sequelize.INTEGER(2),
     allowNull: false,
-    foreignKey: true,
+    primaryKey: true,
     validate: {
       notNull: { msg: "El campo es requerido" },
     }
@@ -237,7 +237,7 @@ productos.init({
   },
 
   precio: {
-    type: Sequelize.FLOAT(),
+    type: Sequelize.FLOAT(6),
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
@@ -254,19 +254,67 @@ productos.init({
 })
 
 // conectar productos
-// Productos.sync().then(() => {
 
-//   return producto.create({
-//     nombre: 'portatil lenovo',
-//     id_categoria: 1,
-//     popularidad: 10,
-//     ventas: 5,
-//     stock: 30,
-//     precio: 4,
-//     descripcion:'sldjfasjfasoiflkndfnasodif'
+Productos.sync().then(() => {
 
-//   });
-// });
+  return producto.create({
+    nombre: 'portatil lenovo',
+    id_categoria: 1,
+    popularidad: 10,
+    ventas: 5,
+    stock: 30,
+    precio: 4,
+    descripcion:'sldjfasjfasoiflkndfnasodif'
+
+  });
+
+});
+
+// --- modelo producto ---
+
+facturas.init ({
+
+  id_factura: {
+    type: Sequelize.INTEGER(6),
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+
+  id_usuario: {
+    type: Sequelize.INTEGER(4),
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+
+  id_producto: {
+    type: Sequelize.INTEGER(4),
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+
+  total: {
+    type: Sequelize.FLOAT(6),
+    allowNull: false
+  }
+})
+
+// conectar facturas
+
+Facturas.sync().then(() => {
+
+  return factura.create({
+    
+    id_factura: 1,
+    id_usuario: 2,
+    id_producto: 3,
+    total: 12.34
+
+  })
+
+});
 
 
 
