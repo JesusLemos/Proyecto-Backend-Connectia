@@ -80,109 +80,193 @@ Usuarios.init({
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
-      }
+    }
   },
   apellido: {
     type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
-      }
+    }
   },
-  
-    email: {
-      type: Sequelize.STRING(100),
-      allowNull: false,
-      validate: {
-        notNull: { msg: "El campo es requerido" },
-        }
-    },
 
-    dni: {
-      type: Sequelize.INTEGER(8),
-      allowNull: false,
-      validate: {
-        notNull: { msg: "El campo es requerido" },
-        }
-    },
+  email: {
+    type: Sequelize.STRING(100),
+    allowNull: false,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  },
 
-    direccion: {
-      type: Sequelize.STRING(100),
-      allowNull: false,
-      validate: {
-        notNull: { msg: "El campo es requerido" },
-        }
-    },
-  
+  dni: {
+    type: Sequelize.INTEGER(8),
+    allowNull: false,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  },
+
+  direccion: {
+    type: Sequelize.STRING(100),
+    allowNull: false,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  },
+
   provincia: {
     type: Sequelize.STRING(100),
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
-      }
+    }
 
   },
-  fecha_nacimiento:{
+  fecha_nacimiento: {
     type: Sequelize.DATEONLY,
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
-      }
+    }
 
   },
-  pregunta_secreta:{
+  pregunta_secreta: {
     type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
-      }
+    }
 
   },
 
-  contrasenya:{
+  contrasenya: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
-      }
+    }
   },
-  telefono:{
+  telefono: {
     type: Sequelize.INTEGER(15),
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
-      }
+    }
   },
-  admin:{
-   type: Sequelize.BOOLEAN
+  admin: {
+    type: Sequelize.BOOLEAN
   }
 
-  
+
 }, {
-    sequelize,
-    modelName: 'usuarios'
-    
-  });
+  sequelize,
+  modelName: 'usuarios'
 
-  // conectar usuarios
-  Usuarios.sync().then(() => {
-  
-    return usuario.create({
-      nombre: 'Laura',
-      apellido: 'Cruz',
-      email: 'lauracruz@gmail.com',
-      dni: 44891806,
-      direccion: 'C/ cuenca',
-      provincia: 'Valencia',
-      fecha_nacimiento: 1992-03-13,
-      pregunta_secreta:'si',
-      contrasenya:'12345678',
-      telefono: 648391234,
-      admin: true
-    });
-  });
+});
 
-  // --- modelo producto ---
+// conectar usuarios
+Usuarios.sync().then(() => {
+
+  return usuario.create({
+    nombre: 'Laura',
+    apellido: 'Cruz',
+    email: 'lauracruz@gmail.com',
+    dni: 44891806,
+    direccion: 'C/ cuenca',
+    provincia: 'Valencia',
+    fecha_nacimiento: 1992 - 03 - 13,
+    pregunta_secreta: 'si',
+    contrasenya: '12345678',
+    telefono: 648391234,
+    admin: true
+  });
+});
+
+// --- modelo producto ---
+
+productos.init({
+
+  id_producto: {
+    type: Sequelize.INTEGER(4),
+    autoIncrement: true,
+    allowNull: false,
+    primaryKey: true
+  },
+
+  nombre: {
+    type: Sequelize.STRING(100),
+    allowNull: false,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  },
+
+  id_categoria: {
+    type: Sequelize.INTEGER(2),
+    allowNull: false,
+    foreignKey: true,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+
+
+  },
+
+  popularidad: {
+    type: Sequelize.INTEGER(3),
+    allowNull: false,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  },
+
+  ventas: {
+    type: Sequelize.INTEGER(6),
+    allowNull: false,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+
+  },
+  stock: {
+    type: Sequelize.INTEGER(6),
+    allowNull: false,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  },
+
+  precio: {
+    type: Sequelize.FLOAT(),
+    allowNull: false,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  },
+
+  descripcion: {
+    type: Sequelize.STRING(1000),
+    allowNull: false,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  }
+})
+
+// conectar productos
+// Productos.sync().then(() => {
+
+//   return producto.create({
+//     nombre: 'portatil lenovo',
+//     id_categoria: 1,
+//     popularidad: 10,
+//     ventas: 5,
+//     stock: 30,
+//     precio: 4,
+//     descripcion:'sldjfasjfasoiflkndfnasodif'
+
+//   });
+// });
 
 
 
