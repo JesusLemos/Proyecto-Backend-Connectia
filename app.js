@@ -316,7 +316,25 @@ Facturas.sync().then(() => {
 
 });
 
+// --- modelo categoria ---
 
+categoria.init ({
+
+  id_categoria: {
+    type: Sequelize.INTEGER(2),
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true
+  },
+
+  nombre: {
+    type: Sequelize.STRING(20),
+    allowNull: true,
+    validate: {
+      notNull: { msg: "El campo es requerido" },
+    }
+  }
+})
 
 
 module.exports = app;
