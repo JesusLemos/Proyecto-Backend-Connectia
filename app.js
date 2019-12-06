@@ -123,7 +123,7 @@ Usuarios.init({
 
   },
   fecha_nacimiento: {
-    type: Sequelize.DATEONLY,
+    type: Sequelize.DATEONLY(10),
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
@@ -140,7 +140,7 @@ Usuarios.init({
   },
 
   contrasenya: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING(20),
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
@@ -154,7 +154,7 @@ Usuarios.init({
     }
   },
   admin: {
-    type: Sequelize.BOOLEAN
+    type: Sequelize.STRING(5)
   }
 
 
@@ -167,7 +167,7 @@ Usuarios.init({
 // conectar usuarios
 Usuarios.sync().then(() => {
 
-  return usuario.create({
+  return Usuarios.create({
     nombre: 'Laura',
     apellido: 'Cruz',
     email: 'lauracruz@gmail.com',
@@ -178,7 +178,7 @@ Usuarios.sync().then(() => {
     pregunta_secreta: 'si',
     contrasenya: '12345678',
     telefono: 648391234,
-    admin: true
+    admin: 'true'
   });
 });
 
@@ -264,7 +264,7 @@ productos.init({
 
 productos.sync().then(() => {
 
-  return producto.create({
+  return productos.create({
     nombre: 'portatil lenovo',
     id_categoria: 1,
     popularidad: 10,
@@ -292,8 +292,7 @@ facturas.init ({
   id_usuario: {
     type: Sequelize.INTEGER(4),
     allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
+    primaryKey: true
   },
 
   id_producto: {
@@ -317,9 +316,9 @@ facturas.init ({
 
 facturas.sync().then(() => {
 
-  return factura.create({
+  return facturas.create({
     
-    id_factura: 1,
+    // id_factura: 1,
     id_usuario: 2,
     id_producto: 3,
     total: 12.34
@@ -334,14 +333,13 @@ categoria.init ({
 
   id_categoria: {
     type: Sequelize.INTEGER(2),
-    allowNull: false,
     autoIncrement: true,
     primaryKey: true
   },
 
   nombre: {
     type: Sequelize.STRING(20),
-    allowNull: true,
+    allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
     }
@@ -359,7 +357,7 @@ categoria.sync().then(() => {
 
   return categoria.create({
     
-    id_categoria: 1,
+    // id_categoria: 1,
     nombre: 'Tablet'
 
   })
@@ -382,7 +380,7 @@ provincias.init ({
 
   nombre: {
     type: Sequelize.STRING(20),
-    allowNull: true,
+    allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
     }
@@ -404,11 +402,11 @@ provincias.init ({
 
 // conectar facturas
 
-provincia.sync().then(() => {
+provincias.sync().then(() => {
 
-  return provincia.create({
+  return provincias.create({
     
-    id_provincia: 1,
+    // id_provincia: 1,
     nombre: 'Valencia',
     pais: 'Espanya'
 
