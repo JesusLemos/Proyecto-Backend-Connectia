@@ -182,8 +182,9 @@ Usuarios.sync().then(() => {
   });
 });
 
-// --- modelo producto ---
 
+// --- modelo producto ---
+class productos extends Model { }
 productos.init({
 
   id_producto: {
@@ -251,11 +252,17 @@ productos.init({
       notNull: { msg: "El campo es requerido" },
     }
   }
-})
+},
+  {
+    sequelize,
+    modelName: 'productos'
+  
+  });
+
 
 // conectar productos
 
-Productos.sync().then(() => {
+productos.sync().then(() => {
 
   return producto.create({
     nombre: 'portatil lenovo',
@@ -271,6 +278,7 @@ Productos.sync().then(() => {
 });
 
 // --- modelo factura ---
+class facturas extends Model { }
 
 facturas.init ({
 
@@ -291,19 +299,23 @@ facturas.init ({
   id_producto: {
     type: Sequelize.INTEGER(4),
     allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
+    primaryKey: true
   },
 
   total: {
     type: Sequelize.FLOAT(6),
     allowNull: false
   }
-})
+},
+{
+  sequelize,
+  modelName: 'facturas'
+
+});
 
 // conectar facturas
 
-Facturas.sync().then(() => {
+facturas.sync().then(() => {
 
   return factura.create({
     
@@ -317,7 +329,7 @@ Facturas.sync().then(() => {
 });
 
 // --- modelo categoria ---
-
+class categoria extends Model { }
 categoria.init ({
 
   id_categoria: {
@@ -334,7 +346,12 @@ categoria.init ({
       notNull: { msg: "El campo es requerido" },
     }
   }
-})
+},
+{
+  sequelize,
+  modelName: 'categorias'
+
+});
 
 // conectar categoria
 
@@ -352,6 +369,7 @@ categoria.sync().then(() => {
 
 
 // --- Modelo Provincias ---
+class provincias extends Model { }
 
 provincias.init ({
 
@@ -377,6 +395,11 @@ provincias.init ({
       notNull: { msg: "El campo es requerido" },
     }
   }
+},
+{
+  sequelize,
+  modelName: 'provincias'
+
 });
 
 // conectar facturas
