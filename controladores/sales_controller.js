@@ -3,7 +3,7 @@ const sequelize = require ('sequelize');
 
 const salesController = (req, res) => {
 
-    const db = ({nombre:'lenovo', ventas: 5}, {nombre:'acer', ventas: 7}, {nombre:'asus', ventas: 3})
+    const db = [{nombre:'lenovo', ventas: 5}, {nombre:'acer', ventas: 7}, {nombre:'asus', ventas: 3}]
 
     const topVentas = db.ventas.filter( venta => venta.ventas > 4)
 
