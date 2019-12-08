@@ -3,12 +3,11 @@ const Sequelize = require('sequelize');
 
 const seacher_product_title_controller = (req, res) => {
    const db = [{ nombre:'Jesus', edad:20 }, {nombre:'Laura', edad:20}]
-    const seacher = req.body;
-
-    const buscarProducto = db.filter(producto => {
-        producto.nombre === seacher.nombre
-    }
-    )
+    const seacher = req.body.nombre;
+    
+console.log(seacher)
+    const buscarProducto = db.filter(producto =>  producto.nombre === seacher  )
+    console.log(buscarProducto)
     if(buscarProducto){
         return res
         .status(201)
