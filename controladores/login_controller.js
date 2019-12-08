@@ -1,5 +1,5 @@
 const sequelize = require ('sequelize');
-const db = require ('./models/model.js')
+const db = require ('./models/model.js');
 
 const loginController = (req, res) => {
 
@@ -23,4 +23,4 @@ const loginController = (req, res) => {
     }
 }
 
-module.exports = login_controller;
+module.exports = loginController;
