@@ -20,19 +20,14 @@ sequelize
 
 const Model = Sequelize.Model;
 
-class Usuarios extends Model { }
+class Usuario extends Model { }
 // Creacion de modelos
 
 // --- modelo de usuario---
 
-Usuarios.init({
+Usuario.init({
   // atributos
-  id_usuario: {
-    type: Sequelize.INTEGER(4),
-    autoIncrement: true,
-    primaryKey: true
 
-  },
   nombre: {
     type: Sequelize.STRING(20),
     allowNull: false,
@@ -52,6 +47,7 @@ Usuarios.init({
     type: Sequelize.STRING(100),
     allowNull: false,
     validate: {
+      isEmail: true,
       notNull: { msg: "El campo es requerido" },
     }
   },
@@ -123,22 +119,18 @@ Usuarios.init({
 });
 
 // conectar usuarios
-Usuarios.sync().then(() => {
-
+Usuario.sync().then(() => {
 
 });
 
 
-// --- modelo producto ---
-class productos extends Model { }
-productos.init({
+//Vincular provincia con usuario
+User.hasOne(Provincia);
 
-  id_producto: {
-    type: Sequelize.INTEGER(4),
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true
-  },
+
+// --- modelo producto ---
+class Producto extends Model { }
+Producto.init({
 
   nombre: {
     type: Sequelize.STRING(100),
@@ -146,17 +138,6 @@ productos.init({
     validate: {
       notNull: { msg: "El campo es requerido" },
     }
-  },
-
-  id_categoria: {
-    type: Sequelize.INTEGER(2),
-    allowNull: false,
-    primaryKey: true,
-    validate: {
-      notNull: { msg: "El campo es requerido" },
-    }
-
-
   },
 
   popularidad: {
@@ -184,7 +165,7 @@ productos.init({
   },
 
   precio: {
-    type: Sequelize.FLOAT(6),
+    type: Sequelize.FLOAT(6, 2),
     allowNull: false,
     validate: {
       notNull: { msg: "El campo es requerido" },
@@ -202,72 +183,52 @@ productos.init({
   {
     sequelize,
     modelName: 'productos'
-  
+
   });
+
 
 
 // conectar productos
+Producto.sync().then(() => {
 
-productos.sync().then(() => {
-
-
-
-  });
+});
 
 
 
 // --- modelo factura ---
-class facturas extends Model { }
+class Factura extends Model { }
 
-facturas.init ({
-
-  id_factura: {
-    type: Sequelize.INTEGER(6),
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true
-  },
-
-  id_usuario: {
-    type: Sequelize.INTEGER(4),
-    allowNull: false,
-    primaryKey: true
-  },
-
-  id_producto: {
-    type: Sequelize.INTEGER(4),
-    allowNull: false,
-    primaryKey: true
-  },
+Factura.init({
 
   total: {
     type: Sequelize.FLOAT(6),
     allowNull: false
   }
 },
-{
-  sequelize,
-  modelName: 'facturas'
+  {
+    sequelize,
+    modelName: 'factura'
 
-});
+  });
 
 // conectar facturas
 
-facturas.sync().then(() => {
-
-
+Factura.sync().then(() => {
 
 });
 
-// --- modelo categoria ---
-class categoria extends Model { }
-categoria.init ({
 
-  id_categoria: {
-    type: Sequelize.INTEGER(2),
-    autoIncrement: true,
-    primaryKey: true
-  },
+//Vincular factura con usuario
+Factura.hasOne(User);
+
+//Crear tabla Factura_Producto para vincular 
+Factura.belongsToMany(Producto, {through: 'Factura_Producto'});
+Producto.belongsToMany(Factura, {through: 'Factura_Producto'});
+
+
+// --- modelo categoria ---
+class Categoria extends Model { }
+Categoria.init({
 
   nombre: {
     type: Sequelize.STRING(20),
@@ -277,33 +238,28 @@ categoria.init ({
     }
   }
 },
-{
-  sequelize,
-  modelName: 'categorias'
+  {
+    sequelize,
+    modelName: 'categoria'
 
-});
+  });
+
+
+//Vincular la categoría a un producto
+Producto.hasOne(Categoria);
+
 
 // conectar categoria
-
-categoria.sync().then(() => {
-
-
+Categoria.sync().then(() => {
 
 });
 
 
 
 // --- Modelo Provincias ---
-class provincias extends Model { }
+class Provincia extends Model { }
 
-provincias.init ({
-
-  id_provincia: {
-  type: Sequelize.INTEGER(2),
-  allowNull: false,
-  autoIncrement: true,
-  primaryKey: true
-  },
+Provincia.init({
 
   nombre: {
     type: Sequelize.STRING(20),
@@ -321,17 +277,14 @@ provincias.init ({
     }
   }
 },
-{
-  sequelize,
-  modelName: 'provincias'
+  {
+    sequelize,
+    modelName: 'provincia'
 
-});
+  });
 
 // conectar facturas
-
-provincias.sync().then(() => {
-
-
+Provincia.sync().then(() => {
 
 });
 
