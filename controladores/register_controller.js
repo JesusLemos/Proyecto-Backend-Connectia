@@ -1,5 +1,5 @@
 const sequelize = require ('sequelize');
-const db = require ('./models/model.js');
+const db = require ('../models/model.js');
 
 const registerController = (req, res) => {
     
