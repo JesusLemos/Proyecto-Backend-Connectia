@@ -1,26 +1,26 @@
-const sequelize = require ('sequelize');
-const db = require ('../models/model');
+// const sequelize = require ('sequelize');
+// const db = require ('../models/model');
 
-const loginController = (req, res) => {
+ const loginController = (req, res) => {
 
-    const usuario = req.body
+//     const usuario = req.body
 
-    const usuarioExistente = db.usuario.find( usuarioExistente => 
-        usuarioExistente.nombre === usuario.nombre && usuarioExistente.contrasenya === usuario.contrasenya);
+//     const usuarioExistente = db.usuario.find( usuarioExistente => 
+//         usuarioExistente.nombre === usuario.nombre && usuarioExistente.contrasenya === usuario.contrasenya);
     
-    if (usuarioExistente) {
+//     if (usuarioExistente) {
  
-    // ------------  HACE FALTA AÑADIR TOKEN -------------
+//     // ------------  HACE FALTA AÑADIR TOKEN -------------
 
-        res
-        .status(200)
-        .json( {message: `Login Valido`})
-    }
-    else {
-        res
-        .status(400)
-        .json( {message: `Login Invalido`})
-    }
-}
+//         res
+//         .status(200)
+//         .json( {message: `Login Valido`})
+//     }
+//     else {
+//         res
+//         .status(400)
+//         .json( {message: `Login Invalido`})
+//     }
+ }
 
-module.exports = loginController;
+ module.exports = loginController;

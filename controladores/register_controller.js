@@ -1,29 +1,20 @@
-const sequelize = require ('sequelize');
-const db = require ('../models/model.js');
+const db = require ('../models/index');
 
-const registerController = (req, res) => {
+async function registerController (req, res) {
+    try{
+        const usuario = await db.Usuario.create(req.body);
+        console.log('Usuario: s',usuario)
+        res.status(200).json({ message: 'Registro completado', usuario: usuario})
+    }catch (error) {
+        console.error(error)
+        res.status(400).json({
+            message: 'register not done',
+            error: error,
+          });
+        
+    }
+
     
-    const usuario = req.body
-
-    //Contraseña mínimo de 8 carácteres
-    const longitudContrasenya = /.{8,}/
-
-    if (!longitudContrasenya.test(usuario.contrasenya)) {
-        return res 
-        .status(400)
-        .json( {message: `La contraseña debe tener mínimo 8 carácteres`})
-    }
-
-    //Comprobar que el usuario no existe
-    const usuarioExiste = db.usuario.some(
-        usuarioExiste => usuarioExiste.email === usuario.email
-    )
-
-    if (usuarioExiste) {
-        return res
-        .status(400)
-        .json( {message: `Usuario ya registrado`})
-    }
 
 }
 module.exports = registerController;
