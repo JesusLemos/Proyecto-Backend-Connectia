@@ -1,3 +1,5 @@
+const db = require('./models');
+
 
 var express = require('express');
 var path = require('path');
@@ -28,10 +30,5 @@ app.use('/usuarios', users);
 app.use('/productos', productos);
 
 
-
-
-
-
-
-console.log()
+db.sequelize.sync();
 module.exports = app;

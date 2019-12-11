@@ -9,8 +9,5 @@ module.exports = (sequelize, DataTypes) => {
             }
         }
     });
-    Categoria.sync({ force: true }).catch(error =>
-    console.error(`no se conecta a la base de datos`, error)
-    );
     return Categoria;
 };

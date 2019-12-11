@@ -76,17 +76,26 @@ module.exports = (sequelize, DataTypes) => {
 
     admin: {
       type: DataTypes.BOOLEAN
-    }
-  });
+    },
+
+    token: {
+      type: DataTypes.STRING,
+    },
+
+    provincia_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false
+    },
+
+  
+  } );
 
   Usuario.associate = models => {
-    Usuario.hasOne(models.Provincia);
-    Usuario.hasMany(models.Factura)
+    Usuario.belongsTo(models.Provincia, {foreignKey: 'provincia_id'});
+    Usuario.belongsToMany(models.Producto, {through: 'Pedido', foreignKey: 'usuario_id'});
   };
 
 
-  Usuario.sync({ force: true }).catch(error =>
-    console.log(`no se puede conectar a la base de datos`, error),
-  );
+
   return Usuario;
 };

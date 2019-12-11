@@ -38,14 +38,20 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 notNull: { msg: "El campo es requerido" },
             }
+        },
+
+        categoria_id: {
+            type: DataTypes.INTEGER(11),
+            allowNull: false
         }
+
     });
     Producto.associate = models => {
-        Producto.hasOne(models.Categoria);
-        Producto.belongsToMany(models.Factura, {through: 'Factura_Producto'});
+        Producto.belongsTo(models.Categoria, {foreignKey: 'categoria_id'});
+        Producto.belongsToMany(models.Usuario, {through: 'Pedido', foreignKey: 'producto_id'});
     };
-    Producto.sync({ force: true }).catch(error =>
-        console.error(`no se ha conectado a la base de datos`, error));
+    // Producto.sync({ force: true }).catch(error =>
+    //     console.error(`no se ha conectado a la base de datos`));
 
     return Producto;
 };
