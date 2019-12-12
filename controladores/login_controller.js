@@ -1,26 +1,48 @@
-// const sequelize = require ('sequelize');
-// const db = require ('../models/model');
+const db = require('../models');
 
- const loginController = (req, res) => {
-
-//     const usuario = req.body
-
-//     const usuarioExistente = db.usuario.find( usuarioExistente => 
-//         usuarioExistente.nombre === usuario.nombre && usuarioExistente.contrasenya === usuario.contrasenya);
+const { 
+    // comprobarContrasenya,
     
-//     if (usuarioExistente) {
- 
-//     // ------------  HACE FALTA AÑADIR TOKEN -------------
+    crearJWT,
+     } = require('../servicios/autentificacion')
 
-//         res
-//         .status(200)
-//         .json( {message: `Login Valido`})
-//     }
-//     else {
-//         res
-//         .status(400)
-//         .json( {message: `Login Invalido`})
-//     }
- }
+async function loginController(req, res) {
 
- module.exports = loginController;
+    try {
+
+        const usuario = await db.Usuario.findOne({
+            where: { email: req.body.email }
+        });
+        if (!usuario) throw new Error('No existe Usuario');
+
+        const comprobarContrasenya = await db.Usuario.findOne({
+            where: { contrasenya: req.body.contrasenya}
+        }  
+        );
+        if (!comprobarContrasenya) throw new Error('Contraseña no valida');
+
+        const dato = {
+            nombre: usuario.nombre,
+            email: usuario.email,
+            id: usuario.id,
+        };
+        usuario.token = await crearJWT(dato);
+        await usuario.save();
+
+        res.json({
+            message: 'login valido',
+            usuario: dato,
+            token: usuario.token
+        });
+
+    } catch (error){
+        console.error(error);
+
+        res.status(401).json({
+            message: 'login invalido',
+        });
+    } 
+}
+
+
+module.exports = loginController;

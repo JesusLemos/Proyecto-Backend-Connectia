@@ -21,8 +21,9 @@ async function decodeJWT(token){
     return jwt.verify(token, conSecreta)
 }
 
-function comprobarContrasenya(contrasenya){
-    const numeroCaracteres = contrasenya.length >= 8;
+ function comprobarContrasenya(contrasenya){
+   
+    // const numeroCaracteres = contrasenya.length >= 8;
 }
 module.exports = {
     contrasenyaConHash,
