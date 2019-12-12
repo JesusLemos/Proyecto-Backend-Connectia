@@ -1,9 +1,8 @@
-const db = require ('../models/index');
+const db = require ('../models');
 
 async function registerController (req, res) {
     try{
         const usuario = await db.Usuario.create(req.body);
-        console.log('Usuario: s',usuario)
         res.status(200).json({ message: 'Registro completado', usuario: usuario})
     }catch (error) {
         console.error(error)
