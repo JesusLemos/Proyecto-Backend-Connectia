@@ -49,6 +49,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull:false
         }
 
+    }, {
+        
     });
     Producto.associate = models => {
         Producto.belongsTo(models.Categoria, {foreignKey: 'categoria_id'});

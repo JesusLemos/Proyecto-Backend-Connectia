@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
                 notNull: { msg: "El campo es requerido" },
             }
         }
-    });
+    }, {tableName: 'Provincias'});
 
 
 
