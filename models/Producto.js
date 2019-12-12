@@ -43,6 +43,10 @@ module.exports = (sequelize, DataTypes) => {
         categoria_id: {
             type: DataTypes.INTEGER(11),
             allowNull: false
+        },
+        imagen: {
+            type: DataTypes.STRING(1000),
+            allowNull:false
         }
 
     });
