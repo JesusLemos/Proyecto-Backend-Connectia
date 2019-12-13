@@ -1,12 +1,16 @@
 const sequelize = require ('sequelize');
+const db = require('../models')
+async function visualizePoduct  (req, res) {
+    try{
+        const productos = await db.Producto.findAll()
+        console.log(productos)
+        res 
+        .status(200)
+        .send(productos)
 
-const visualizePoduct = (req, res) => {
-    
-    const db = [{nombre:'lenovo', precio: 5}, {nombre:'acer', precio: 7}, {nombre:'asus', precio: 3}]
-
-    res 
-    .status(200)
-    .send(db)
+    }catch(error){
+        console.error('Algo fallo')
+    }
 }
 
 module.exports = visualizePoduct;
