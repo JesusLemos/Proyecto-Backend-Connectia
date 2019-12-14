@@ -1,30 +1,28 @@
-const Sequelize = require('sequelize');
-// const db = require('./models/models.js')
-
-const seacher_product_title_controller = (req, res) => {
-   const db = [{ nombre:'Jesus', edad:20 }, {nombre:'Laura', edad:20}]
-    const seacher = req.body.nombre;
+async function seacher_product_title_controller (req, res){
+    const db = require('../models');
+    const Op = require('Sequelize').Op;
     
-console.log(seacher)
-    const buscarProducto = db.filter(producto =>  producto.nombre === seacher  )
-    console.log(buscarProducto)
-    if(buscarProducto){
-        return res
-        .status(201)
-        .send(buscarProducto)
-    }else{
-        return res
-        .status(401)
-        .json({mensaje:'No se encontro el usuario'})
+    const productoBuscado = req.params.nombre
+    
+    try{
+        const productos = await db.Producto.findAll({
+            where: {
+                nombre:{
+                    [Op.like]: `${productoBuscado}%`
+                }
+            }
+        })
+        if(productos){
+         return   res
+            .status(200)
+            .send(productos)
+        }else {
+            return res.status(400).json( {message: `No se ha encontrado producto`})
+        }
+    }catch (error) {
+        console.log(error);
+        
     }
-
-//     const productos = db.productos;
-//     const encontrarProductos = db.productos.findAll({
-//         attributes: ['title']
-//       }, {where:{
-//          productos.nombre = seacher.nombre
-//       }});
-
-}
+} 
 
 module.exports=seacher_product_title_controller;
