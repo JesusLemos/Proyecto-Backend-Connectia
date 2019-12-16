@@ -54,10 +54,9 @@ module.exports = (sequelize, DataTypes) => {
     });
     Producto.associate = models => {
         Producto.belongsTo(models.Categoria, {foreignKey: 'categoria_id'});
-        Producto.belongsToMany(models.Usuario, {through: 'Pedido', foreignKey: 'producto_id'});
+        Producto.hasMany(models.Pedido, {foreignKey: 'producto_id'});
     };
-    // Producto.sync({ force: true }).catch(error =>
-    //     console.error(`no se ha conectado a la base de datos`));
+   
 
     return Producto;
 };
