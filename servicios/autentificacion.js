@@ -21,14 +21,26 @@ async function decodeJWT(token){
     return jwt.verify(token, conSecreta)
 }
 
- function comprobarContrasenya(contrasenya){
-   
-    // const numeroCaracteres = contrasenya.length >= 8;
+function validarContrasenya (contrasenya) {
+
+    const enoughCharacters = contrasenya.length >= 8;
+    const containsUpperCase = (/[A-Z]/).test(contrasenya);
+    const containLowerCase = /[a-z]/.test(contrasenya);
+    const containNumbers = /[0-9]/.test(contrasenya);
+
+    if (enoughCharacters && containLowerCase && containNumbers && containsUpperCase) {
+        return true;
+    } else {
+        throw new Error('invalidPasswordError');
+    }
+
 }
+
+ 
 module.exports = {
     contrasenyaConHash,
     compararContrasenya,
     crearJWT,
     decodeJWT,
-    comprobarContrasenya
+    validarContrasenya
 }

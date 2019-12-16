@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     contrasenya: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(1000),
       allowNull: false,
       validate: {
         notNull: { msg: "El campo es requerido" },
