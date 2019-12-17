@@ -1,28 +1,12 @@
 const db = require ('../models');
-const sequelize = require ('sequelize');
-// const sequelize = new Sequelize();
-async function salesController (req, res) {
+const salesController = (req, res) => {
 
-    try{
-
-    const topVentas =  await db.Pedido.findAll({
+  db.Pedido.findAll({
        
-        attributes: ['total',[sequelize.fn('SUM', sequelize.col('Pedido.cantidad')), 'top_ventas']]
-    })
+        attributes: ['producto_id',[db.sequelize.fn('SUM', db.sequelize.col('cantidad')), 'top_ventas']],
+        group: ['producto_id']
+    }).then(items => res.status(200).json(items)).catch(error => console.error(error))
 
-    if(topVentas) {
-        res
-        .status(200)
-        .send(topVentas)
-    }
-    else {
-        res
-        .status(400)
-        .json( {message: `No se ha encontrado ninguo`})
-    }
-}catch(error){
-    console.log(error)
-}
 }
 
 module.exports = salesController;
