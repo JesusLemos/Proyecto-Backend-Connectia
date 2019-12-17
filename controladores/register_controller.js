@@ -14,7 +14,7 @@ async function registerController(req, res) {
     console.error(error)
 
     if (error.message === 'compararContrasenya') {
-      return res.status(400).json({
+      return res.status(400 ).json({
         message: 'invalid password',
         error: error,
       });
@@ -31,7 +31,7 @@ async function registerController(req, res) {
         error: error.errors[0].message,
       });
     }
-    res.status(500).json({
+    res.status(400).json({
       message: 'register not done',
       error: error,
     });
