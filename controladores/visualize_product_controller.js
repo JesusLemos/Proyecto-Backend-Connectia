@@ -1,6 +1,6 @@
-const sequelize = require ('sequelize');
+
 const db = require('../models')
-async function visualizePoduct  (req, res) {
+async function visualizeProduct  (req, res) {
     try{
         const productos = await db.Producto.findAll()
         console.log(productos)
@@ -13,4 +13,4 @@ async function visualizePoduct  (req, res) {
     }
 }
 
-module.exports = visualizePoduct;
+module.exports = visualizeProduct;
