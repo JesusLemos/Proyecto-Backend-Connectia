@@ -41,5 +41,5 @@ app.use('/usuarios', users);
 app.use('/productos', productos);
 
 
-db.sequelize.sync();
+// db.sequelize.sync();
 module.exports = app;

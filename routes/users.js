@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const authcontroller =require('../middlewares/auth')
+
 
 const provincia = require('../controladores/provincias_controller')
 const loginController = require('../controladores/login_controller')
@@ -14,7 +16,7 @@ router.get('/user', function(req, res, next) {
 router.post('/registro', registerController);
 
 router.post('/login', loginController);
-router.post('/logout', logoutController);
+router.post('/logout', authcontroller,logoutController);
 
 router.get('/perfil/:email', profileController)
 

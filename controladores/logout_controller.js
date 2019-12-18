@@ -1,9 +1,11 @@
-const db  = require('../models');
 
+const db = require('../models')
 async function logoutController(req, res, next) {
     try {
-         const user = await User.findByPk(req.user.id);
-          user.token = null;
+        console.log('cuerpo: ',req.user.id)
+         const user = await db.Usuario.findByPk(req.user.id);
+         console.log("usuario", user)
+         user.token = null;
          await user.save();
          res.json({message:'logout done'});
     } catch (error) {
