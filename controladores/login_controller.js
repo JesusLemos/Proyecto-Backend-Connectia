@@ -1,8 +1,7 @@
 const db = require('../models');
 
 const { 
-    // comprobarContrasenya,
-    
+    compararContrasenya,
     crearJWT,
      } = require('../servicios/autentificacion')
 
@@ -15,9 +14,9 @@ async function loginController(req, res) {
         });
         if (!usuario) throw new Error('No existe Usuario');
 
-        const comprobarContrasenya = await db.Usuario.findOne({
-            where: { contrasenya: req.body.contrasenya}
-        }  
+        const comprobarContrasenya = await compararContrasenya(
+            req.body.contrasenya,
+            usuario.contrasenya
         );
         if (!comprobarContrasenya) throw new Error('Contraseña no valida');
 
