@@ -21,7 +21,7 @@ async function registerController(req, res) {
     }
     if (error.name === 'SequelizeUniqueConstraintError') {
       return res.status(400).json({
-        message: 'register invalid',
+        message: 'Ya existe este usuario',
         error: error.errors[0].message,
       });
     }
