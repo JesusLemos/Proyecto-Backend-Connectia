@@ -30,7 +30,7 @@ async function loginController(req, res) {
 
         res.json({
             message: 'login valido',
-            usuario: dato,
+            usuario: usuario,
             token: usuario.token
         });
 

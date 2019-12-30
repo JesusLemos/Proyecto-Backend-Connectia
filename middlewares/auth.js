@@ -6,7 +6,7 @@ async function authorizationMiddleware(req, res, next) {
   try {
     const jwt = req.headers.authorization;
     const user = await db.Usuario.findOne({where: {token: jwt}});
-    console.log('El usuario es', user)
+    console.log('El usuario es', jwt)
     if(!user) throw new Error('no user found');
 
     req.user = await decodeJWT(jwt);
