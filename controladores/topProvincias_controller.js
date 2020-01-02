@@ -13,7 +13,6 @@ const topProvinciasController = (req, res) => {
     },
     {
         model: db.Producto
-        
     }
 ],
     
