@@ -8,7 +8,10 @@ const  profile = (req, res) => {
             email: `${email}`
         },
         include: [{
-            model: db.Pedido
+            model: db.Pedido,
+            include:[{
+                model:db.Productos
+            }] 
               }] 
     }).then(user => { return res.status(200).send(user)})
     .catch(err => console.error(err) )
