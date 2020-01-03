@@ -6,7 +6,10 @@ const  profile = (req, res) => {
     db.Usuario.findOne({
         where: {
             email: `${email}`
-        }
+        },
+        include: [{
+            model: db.Pedido
+              }] 
     }).then(user => { return res.status(200).send(user)})
     .catch(err => console.error(err) )
 
