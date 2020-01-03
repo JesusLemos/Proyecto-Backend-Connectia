@@ -1,6 +1,6 @@
 async function seacher_product_title_controller (req, res){
     const db = require('../models');
-    const Op = require('Sequelize').Op;
+    const Op = require('sequelize').Op;
     
     const productoBuscado = req.params.nombre
     
