@@ -10,7 +10,7 @@ const  profile = (req, res) => {
         include: [{
             model: db.Pedido,
             include:[{
-                model:db.Productos
+                model:db.Producto
             }] 
               }] 
     }).then(user => { return res.status(200).send(user)})
