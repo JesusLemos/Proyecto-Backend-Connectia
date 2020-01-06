@@ -9,6 +9,7 @@ const seacher_product_id_controller = require('../controladores/seacher_product_
 const topProvinciasController = require('../controladores/topProvincias_controller');
 const categoryProduct = require('../controladores/category_controller');
 const editarProducto = require ('../controladores/product_controller');
+const addProducto = require ('../controladores/product_add_controller');
 
 router.get('/productos/:nombre', seacher_product_title_controller);
 router.get('/ventas', salesController);
@@ -19,6 +20,7 @@ router.get('/provinciastop', topProvinciasController);
 router.post('/pedidos', orderController);
 router.get('/categoria/:id', categoryProduct);
 router.patch('/editar/:id', editarProducto);
+router.patch('/add', addProducto)
 
 
 module.exports = router;
