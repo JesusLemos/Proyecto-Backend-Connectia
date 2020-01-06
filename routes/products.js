@@ -20,7 +20,7 @@ router.get('/provinciastop', topProvinciasController);
 router.post('/pedidos', orderController);
 router.get('/categoria/:id', categoryProduct);
 router.patch('/editar/:id', editarProducto);
-router.patch('/add', addProducto)
+router.post('/add', addProducto)
 
 
 module.exports = router;
