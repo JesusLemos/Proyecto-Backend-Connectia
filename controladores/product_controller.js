@@ -12,7 +12,8 @@ async function editarProducto(req, res) {
 
 
     }catch(error) {
-        console.error(error).res.status(500).json({ message: 'error al modificar producto'})
+        console.error(error)
+        res.status(500).json({ message: 'error al modificar producto'})
     }
     
 }
